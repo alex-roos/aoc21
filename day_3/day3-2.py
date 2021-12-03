@@ -14,75 +14,45 @@ def count_bits_in_position(data_list):
                 count_curr_zeroes[bit_idx] += 1
             else:
                 count_curr_ones[bit_idx]+=1
-
     return [count_curr_zeroes, count_curr_ones]
+
+def extract_lines_with_key_val(parse_list, keep_val, position):
+    rtn_list = []
+    for binary_val in parse_list:
+        if binary_val[position] == keep_val:
+            rtn_list.append(binary_val)
+    return rtn_list
 
 # prepare each original list of binary values
 o_2_forkeeps = data.copy()
 co_2_forkeeps = data.copy()
 
-temp_list = []
-o2_answer = ''
+i = 0
+while len(o_2_forkeeps) > 1:
+    counts = count_bits_in_position(o_2_forkeeps)
+    curr_keep_val = ''
 
-for i in range(len(data[0])):
-    if len(o_2_forkeeps) == 1:
-        # print("length 1 is", o_2_forkeeps)
-        o2_answer = o_2_forkeeps[0]
-
+    if counts[0][i] > counts[1][i]:
+        curr_keep_val = '0'
     else:
-        counts = count_bits_in_position(o_2_forkeeps)
+        curr_keep_val = '1'
+    
+    o_2_forkeeps = extract_lines_with_key_val(o_2_forkeeps, curr_keep_val, i).copy()
+    i += 1
 
-        if counts[0][i] > counts[1][i]:
-            # keep values with zero in current i position
-            for j in range(len(o_2_forkeeps)):
-                if o_2_forkeeps[j][i] == '0':
-                    # print(o_2_forkeeps[j])
-                    temp_list.append(o_2_forkeeps[j])
-        else:
-            # keep values with 1 in current i position
-            for j in range(len(o_2_forkeeps)):
-                if o_2_forkeeps[j][i] == '1':
-                    # print(o_2_forkeeps[j])
-                    temp_list.append(o_2_forkeeps[j])
+i = 0
+while len(co_2_forkeeps) > 1:
+    counts = count_bits_in_position(co_2_forkeeps)
 
-        o_2_forkeeps = temp_list.copy()
-        temp_list = []
-
-        if len(o_2_forkeeps) == 1:
-            o2_answer = o_2_forkeeps[0]
-
-print("O2 answer is:", o2_answer)  
-co_2_answer = ''
-
-temp_list = []
-
-for i in range(len(data[0])):
-    if len(co_2_forkeeps) == 1:
-        co_2_answer = co_2_forkeeps[0]
+    if counts[0][i] <= counts[1][i]:
+        curr_keep_val = '0'
     else:
-        counts = count_bits_in_position(co_2_forkeeps)
+        curr_keep_val = '1'
 
-        if counts[0][i] <= counts[1][i]:
-            for j in range(len(co_2_forkeeps)):
-                if co_2_forkeeps[j][i] == '0':
-                    # print(co_2_forkeeps[j])
-                    temp_list.append(co_2_forkeeps[j])
-        else:
-            for j in range(len(co_2_forkeeps)):
-                if co_2_forkeeps[j][i] == '1':
-                    # print(co_2_forkeeps[j])
-                    temp_list.append(co_2_forkeeps[j])
-
-        co_2_forkeeps = temp_list.copy()
-        temp_list = []
-        # print(co_2_forkeeps)
-
-        if len(co_2_forkeeps) == 1:
-            co_2_answer = co_2_forkeeps[0]
-           
-print("CO2 ans:", co_2_answer)   
+    co_2_forkeeps = extract_lines_with_key_val(co_2_forkeeps, curr_keep_val, i).copy()
+    i += 1
 
 # per Sam, convert binary string to decimal...
-print(int(co_2_answer,2)*int(o2_answer,2))
+print(int(co_2_forkeeps[0],2)*int(o_2_forkeeps[0],2))
 
 file.close()
