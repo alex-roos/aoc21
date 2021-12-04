@@ -31,11 +31,8 @@ i = 0
 while len(o_2_forkeeps) > 1:
     counts = count_bits_in_position(o_2_forkeeps)
     curr_keep_val = ''
-
-    if counts[0][i] > counts[1][i]:
-        curr_keep_val = '0'
-    else:
-        curr_keep_val = '1'
+    
+    curr_keep_val = '0' if counts[0][i] > counts[1][i] else '1'
     
     o_2_forkeeps = extract_lines_with_key_val(o_2_forkeeps, curr_keep_val, i).copy()
     i += 1
@@ -44,10 +41,7 @@ i = 0
 while len(co_2_forkeeps) > 1:
     counts = count_bits_in_position(co_2_forkeeps)
 
-    if counts[0][i] <= counts[1][i]:
-        curr_keep_val = '0'
-    else:
-        curr_keep_val = '1'
+    curr_keep_val = '0' if counts[0][i] <= counts[1][i] else '1'
 
     co_2_forkeeps = extract_lines_with_key_val(co_2_forkeeps, curr_keep_val, i).copy()
     i += 1
