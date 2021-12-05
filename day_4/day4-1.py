@@ -100,14 +100,9 @@ for num in numbers_called:
 
             break
 
-
-
-
 print(f"Winner is board {winner}")            
 
 print(calc_score(boards[winner]) * last_num)
-
-
 
 print(boards)
 boards.remove(boards[winner])
