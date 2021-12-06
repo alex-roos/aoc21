@@ -3,14 +3,12 @@ from collections import Counter
 MATURATION_DAYS = 9
 SIM_LEN = 256
 
+# data prep
 file = open("day_6_input.txt", "r")
-data = file.read().strip().split(",")
+fish_ages = [int(i) for i in file.read().strip().split(",")]
 
-# pairs of start end pairs
-fish_ages = [int(i) for i in data]
+# initialize count values, including those for age with no count
 fish_counter = Counter(fish_ages)
-
-# initialize missing values
 for day in range(MATURATION_DAYS):
     if day not in fish_counter.keys():
         fish_counter[day] = 0
