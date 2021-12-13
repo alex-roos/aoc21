@@ -6,7 +6,6 @@ def count_paths(_graph, _start, _end, path=[], repeated_cave = ''):
     if _start == _end:  # recursion base case
         #print(f"Path: {path}")
         return 1
-
     else:
         for node in _graph[_start]:
             if node.isupper() or (node not in path):
@@ -27,6 +26,7 @@ graph = dict()
 for line in data:
     _src_node, _dst_node = line.split('-')
 
+    # probably could do some default dict thing here
     if _src_node not in graph:
         graph[_src_node] = [_dst_node]
     else:
