@@ -25,7 +25,6 @@ def get_neighbors(n_curr_octos, _row, _col):
 
     return _neighbors
 
-
 def step(curr_octos):
     _count_flashes = 0
 
