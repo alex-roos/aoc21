@@ -35,8 +35,9 @@ for line in data:
         graph[_dst_node] = [_src_node]
     else:
         graph[_dst_node].append(_src_node)
-# for k in graph:
-#     print(f"{k} connects to {graph[k]}")
+
+for k in graph:
+    print(f"{k} connects to {graph[k]}")
 
 final_count_paths = count_paths(graph, "start", "end")
 print(f"Number unique paths: {final_count_paths}")
